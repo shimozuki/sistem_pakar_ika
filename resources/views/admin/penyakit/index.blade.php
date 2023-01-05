@@ -75,8 +75,8 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label for="penyebab">Solusi</label>
-						<input type="text" name="solusi" class="form-control">
-						<!-- <textarea name="solusi" cols="30" rows="6" class="form-control"></textarea> -->
+						<input type="text" name="Solusi" class="form-control">
+						<!-- <textarea name="Solusi" cols="30" rows="6" class="form-control"></textarea> -->
 					</div>
 				</div>
 			</div>
@@ -116,8 +116,8 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label for="penyebab">Solusi</label>
-						<input type="text" class="form-control" name="solusi">
-						<!-- <textarea name="solusi" cols="30" rows="6" class="form-control"></textarea> -->
+						<input type="text" class="form-control" name="Solusi">
+						<!-- <textarea name="Solusi" cols="30" rows="6" class="form-control"></textarea> -->
 					</div>
 				</div>
 			</div>
@@ -160,7 +160,7 @@
 					$('#edit-penyakit input[name="nama"]').val(res.nama)
 					$('#edit-penyakit input[name="kode"]').val(res.kode)
 					$('#edit-penyakit textarea').text(res.penyebab)
-					$('#edit-penyakit input[name="solusi"]').text(res.solusi)
+					$('#edit-penyakit input[name="Solusi"]').text(res.Solusi)
 
 					$('#edit-penyakit').modal('show')
 				})

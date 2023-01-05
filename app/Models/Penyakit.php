@@ -14,7 +14,7 @@ class Penyakit extends Model
         'kode',
         'nama',
         'penyebab',
-        'solusi',
+        'Solusi',
     ];
 
     public $timestamps = false;

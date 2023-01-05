@@ -28,7 +28,7 @@ class PenyakitController extends Controller
             'kode' => 'required',
             'nama' => 'required',
             'penyebab' => 'required',
-            'solusi' => 'required',
+            'Solusi' => 'required',
         ]);
 
         $data = $request->all();
@@ -51,7 +51,7 @@ class PenyakitController extends Controller
             'kode' => 'required',
             'nama' => 'required',
             'penyebab' => 'required',
-            'solusi'    => 'required',
+            'Solusi'    => 'required',
         ]);
 
         $data = $request->all();
