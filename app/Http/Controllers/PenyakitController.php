@@ -27,7 +27,8 @@ class PenyakitController extends Controller
         $request->validate([
             'kode' => 'required',
             'nama' => 'required',
-            'penyebab' => 'required'
+            'penyebab' => 'required',
+            'solusi' => 'required',
         ]);
 
         $data = $request->all();
@@ -49,7 +50,8 @@ class PenyakitController extends Controller
         $request->validate([
             'kode' => 'required',
             'nama' => 'required',
-            'penyebab' => 'required'
+            'penyebab' => 'required',
+            'solusi'    => 'required',
         ]);
 
         $data = $request->all();
