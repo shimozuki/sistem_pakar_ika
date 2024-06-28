@@ -4,7 +4,7 @@
 	@if(session()->has('success'))
 	<x-alert type="success" message="{{ session()->get('success') }}" />
 	@endif
-	<x-card title="Berikut hasil Kerusakan">
+	<x-card title="Berikut hasil diagnosa">
 		<p class="mb-4">
 			<i class="fas fa-user mr-1"></i> {{ $riwayat->nama }} <i class="fas fa-calendar ml-4 mr-1"></i> {{ $riwayat->created_at->format('d M Y, H:m:s') }}
 		</p>
@@ -65,7 +65,6 @@
 			<div class="alert alert-success">
 				<h5 class="font-weight-bold">Kesimpulan</h5>
 				<p>Berdasarkan dari gejala yang kamu pilih atau alami juga berdasarkan Role/Basis aturan yang sudah ditentukan oleh seorang pakar Jaringan maka perhitungan Algoritma Certainty Factor mengambil nilai yang paling tinggi yakni <b>{{ number_format(unserialize($riwayat->cf_max)[0], 3) }} ({{ number_format(unserialize($riwayat->cf_max)[0], 3) * 100 }}%)</b> yaitu <b>{{ unserialize($riwayat->cf_max)[1] }}</b></p>
-				<p><b>Solusi</b><br />{{ unserialize($riwayat->cf_max)[1] }}</p>
 			</div>
 			<div class="mt-3 text-center">
 				<a href="{{ asset("storage/downloads/$riwayat->file_pdf") }}" target="_blank" class="btn btn-primary mr-1"><i class="fas fa-print mr-1"></i> Print</a>

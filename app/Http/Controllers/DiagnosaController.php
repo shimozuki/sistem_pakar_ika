@@ -132,10 +132,10 @@ class DiagnosaController extends Controller
 
                 if (count($final) - 1 == $key) {
                     if ($cf_max == null) {
-                        $cf_max = [$hasil_cf, "{$final[0]->nama} ({$final[0]->kode}) " . '<b>Solusi</b> <br />' . " {$final[0]->Solusi}"];
+                        $cf_max = [$hasil_cf, "{$final[0]->nama} ({$final[0]->kode}) ".'Solusi : '." {$final[0]->Solusi}"];
                     } else {
                         $cf_max = ($hasil_cf > $cf_max[0])
-                            ? [$hasil_cf, "{$final[0]->nama} ({$final[0]->kode}) {$final[0]->Solusi}"]
+                            ? [$hasil_cf, "{$final[0]->nama} ({$final[0]->kode}) ".'Solusi : '." {$final[0]->Solusi}"]
                             : $cf_max;
                     }
 
