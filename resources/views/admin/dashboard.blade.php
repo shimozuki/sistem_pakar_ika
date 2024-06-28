@@ -16,6 +16,7 @@
             icon="hospital" 
             color="primary"
         />
+        
         <x-card-sum 
             text="Daftar Penyakit" 
             value="{{ App\Models\Penyakit::count() }}" 

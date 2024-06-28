@@ -46,6 +46,7 @@
         active="{{ request()->routeIs('admin.member') ? ' active' : '' }}"
     />
     @endcan
+    
 
     @can('penyakit-list')
     <x-nav-link 
