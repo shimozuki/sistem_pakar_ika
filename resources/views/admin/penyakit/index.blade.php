@@ -97,14 +97,6 @@
 			<div class="row mt-2">
 				<div class="col-md-12">
 					<div class="form-group">
-						<label for="penyebab">Keterangan penyebab</label>
-						<textarea name="penyebab" cols="30" rows="6" class="form-control"></textarea>
-					</div>
-				</div>
-			</div>
-			<div class="row mt-2">
-				<div class="col-md-12">
-					<div class="form-group">
 						<label for="penyebab">Solusi</label>
 						<input type="text" class="form-control" name="Solusi">
 						<!-- <textarea name="Solusi" cols="30" rows="6" class="form-control"></textarea> -->
