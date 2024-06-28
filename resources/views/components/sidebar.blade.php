@@ -3,7 +3,7 @@
         <div class="sidebar-brand-icon">
             <img src="{{ asset((setting('logo')) ? '/storage/'.setting('logo') : 'dist/img/logo/computer.png') }}">
         </div>
-        <div class="sidebar-brand-text mx-3">SIPDJK</div>
+        <div class="sidebar-brand-text mx-3">SPK GIZI</div>
     </a>
     <hr class="sidebar-divider my-0">
 
@@ -47,7 +47,6 @@
     />
     @endcan
     
-
     @can('penyakit-list')
     <x-nav-link 
         text="Daftar Penyakit" 
