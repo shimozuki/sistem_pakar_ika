@@ -14,7 +14,6 @@
 			<thead>
 				<th>Kode</th>
 				<th>Nama penyakit</th>
-				<th>Penyebab</th>
 				<th>Solusi</th>
 				<th></th>
 			</thead>
@@ -23,7 +22,6 @@
 				<tr>
 					<td><b>{{ $row->kode }}</b></td>
 					<td>{{ $row->nama }}</td>
-					<td>{{ \Str::limit($row->penyebab, 180) }}</td>
 					<td>{{ \Str::limit($row->Solusi, 180) }}</td>
 					<td>
 						<div class="d-flex justify-between-space">
@@ -60,14 +58,6 @@
 					<div class="form-group">
 						<label for="nama">Nama penyakit</label>
 						<input type="text" class="form-control" name="nama">
-					</div>
-				</div>
-			</div>
-			<div class="row mt-2">
-				<div class="col-md-12">
-					<div class="form-group">
-						<label for="penyebab">Keterangan penyebab</label>
-						<textarea name="penyebab" cols="30" rows="6" class="form-control"></textarea>
 					</div>
 				</div>
 			</div>
