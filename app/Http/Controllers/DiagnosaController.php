@@ -12,8 +12,8 @@ class DiagnosaController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:diagnosa', ['only' => ['index']]);
-         $this->middleware('permission:diagnosa-create', ['only' => ['diagnosa']]);
+        $this->middleware('permission:diagnosa', ['only' => ['index']]);
+        $this->middleware('permission:diagnosa-create', ['only' => ['diagnosa']]);
     }
 
     public function index()
@@ -38,6 +38,12 @@ class DiagnosaController extends Controller
             case -0.4:
                 return 'Mungkin tidak';
                 break;
+            case -0.2:
+                return 'Tidak Tahu';
+                break;
+            case 0.2:
+                return 'Tidak Tahu';
+                break;
             case 0.4:
                 return 'Mungkin';
                 break;
@@ -57,19 +63,19 @@ class DiagnosaController extends Controller
     {
         $data_penyakit = [];
         $gejala_terpilih = [];
-        foreach($data['diagnosa'] as $input) {
-            if(!empty($input)) {
+        foreach ($data['diagnosa'] as $input) {
+            if (!empty($input)) {
                 $opts = explode('+', $input);
                 $gejala = Gejala::with('penyakits')->find($opts[0]);
-                
-                foreach($gejala->penyakits as $penyakit) {
-                    if(empty($data_penyakit[$penyakit->id])){
+
+                foreach ($gejala->penyakits as $penyakit) {
+                    if (empty($data_penyakit[$penyakit->id])) {
                         $data_penyakit[$penyakit->id] = [$penyakit, [$gejala, $opts[1], $penyakit->pivot->value_cf]];
                     } else {
                         array_push($data_penyakit[$penyakit->id], [$gejala, $opts[1], $penyakit->pivot->value_cf]);
                     }
 
-                    if(empty($gejala_terpilih[$gejala->id])) {
+                    if (empty($gejala_terpilih[$gejala->id])) {
                         $gejala_terpilih[$gejala->id] = [
                             'nama' => $gejala->nama,
                             'kode' => $gejala->kode,
@@ -83,8 +89,8 @@ class DiagnosaController extends Controller
 
         $hasil_diagnosa = [];
         $cf_max = null;
-        foreach($data_penyakit as $final) {
-            if(count($final) < 3) {
+        foreach ($data_penyakit as $final) {
+            if (count($final) < 3) {
                 continue;
             }
 
@@ -92,19 +98,19 @@ class DiagnosaController extends Controller
             $cf2 = null;
             $cf_combine = 0;
             $hasil_cf = null;
-            foreach($final as $key => $value) {
-                if($key == 0) {
+            foreach ($final as $key => $value) {
+                if ($key == 0) {
                     continue;
                 }
 
-                if($key == 1) {
+                if ($key == 1) {
                     $cf1 = $final[$key][2] * $final[$key][1];
                 } else {
-                    if($cf_combine != 0) {
+                    if ($cf_combine != 0) {
                         $cf1 = $cf_combine;
                         $cf2 = $final[$key][2] * $final[$key][1];
 
-                        if($cf1 < 0 || $cf2 < 0) {
+                        if ($cf1 < 0 || $cf2 < 0) {
                             $cf_combine = ($cf1 + $cf2) / (1 - min($cf1, $cf2));
                         } else {
                             $cf_combine = $cf1 + ($cf2 * (1 - $cf1));
@@ -114,7 +120,7 @@ class DiagnosaController extends Controller
                     } else {
                         $cf2 = $final[$key][2] * $final[$key][1];
 
-                        if($cf1 < 0 || $cf2 < 0) {
+                        if ($cf1 < 0 || $cf2 < 0) {
                             $cf_combine = ($cf1 + $cf2) / (1 - min($cf1, $cf2));
                         } else {
                             $cf_combine = $cf1 + ($cf2 * (1 - $cf1));
@@ -122,15 +128,14 @@ class DiagnosaController extends Controller
 
                         $hasil_cf = $cf_combine;
                     }
-                    
                 }
 
-                if(count($final) - 1 == $key) {
-                    if($cf_max == null) {
-                        $cf_max = [$hasil_cf, "{$final[0]->nama} ({$final[0]->kode})"];
+                if (count($final) - 1 == $key) {
+                    if ($cf_max == null) {
+                        $cf_max = [$hasil_cf, "{$final[0]->nama} ({$final[0]->kode}) " . '<b>Solusi</b> <br />' . " {$final[0]->Solusi}"];
                     } else {
-                        $cf_max = ($hasil_cf > $cf_max[0]) 
-                            ? [$hasil_cf, "{$final[0]->nama} ({$final[0]->kode})"] 
+                        $cf_max = ($hasil_cf > $cf_max[0])
+                            ? [$hasil_cf, "{$final[0]->nama} ({$final[0]->kode}) {$final[0]->Solusi}"]
                             : $cf_max;
                     }
 
@@ -142,9 +147,7 @@ class DiagnosaController extends Controller
                     $hasil_cf = null;
                 }
 
-
-
-                if(empty($hasil_diagnosa[$final[0]->id])) {
+                if (empty($hasil_diagnosa[$final[0]->id])) {
                     $hasil_diagnosa[$final[0]->id] = [
                         'nama_penyakit' => $final[0]->nama,
                         'kode_penyakit' => $final[0]->kode,
@@ -158,7 +161,7 @@ class DiagnosaController extends Controller
                             ]
                         ]
                     ];
-                } else {                        
+                } else {
                     array_push($hasil_diagnosa[$final[0]->id]['gejala'], [
                         'nama' => $final[$key][0]->nama,
                         'kode' => $final[$key][0]->kode,
@@ -173,15 +176,17 @@ class DiagnosaController extends Controller
         return [
             'hasil_diagnosa' => $hasil_diagnosa,
             'gejala_terpilih' => $gejala_terpilih,
-            'cf_max' => $cf_max
+            'cf_max' => $cf_max,
+            'Solusi' => isset($cf_max[1]) ? $cf_max[1] : 'No solution available'
         ];
     }
+
 
     public function diagnosa(Request $request)
     {
         $name = auth()->user()->name;
-         
-        if(auth()->user()->hasRole('Admin')) {
+
+        if (auth()->user()->hasRole('Admin')) {
             $request->validate(['nama' => 'required|string|max:100']);
             $name = $request->nama;
         }
@@ -190,7 +195,7 @@ class DiagnosaController extends Controller
 
         $result = $this->kalkulasi_cf($data);
 
-        if($result['cf_max'] == null) {
+        if ($result['cf_max'] == null) {
             return back()->with('error', 'Terjadi sebuah kesalahan');
         }
 
@@ -204,14 +209,14 @@ class DiagnosaController extends Controller
 
         $path = public_path('storage/downloads');
 
-        if(!File::isDirectory($path)){
+        if (!File::isDirectory($path)) {
             File::makeDirectory($path, 0777, true, true);
         }
 
-        $file_pdf = 'Diagnosa-'.$name.'-'.time().'.pdf';
+        $file_pdf = 'Diagnosa-' . $name . '-' . time() . '.pdf';
 
         PDF::loadView('pdf.riwayat', ['id' => $riwayat->id])
-            ->save($path."/".$file_pdf);
+            ->save($path . "/" . $file_pdf);
 
         $riwayat->update(['file_pdf' => $file_pdf]);
 

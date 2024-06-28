@@ -20,8 +20,8 @@
     
     @can('diagnosa')    
     <x-nav-link 
-        text="Cek Kerusakan" 
-        icon="tools" 
+        text="Pemeriksaan" 
+        icon="stethoscope" 
         url="{{ route('admin.diagnosa') }}"
         active="{{ request()->routeIs('admin.diagnosa') ? ' active' : '' }}"
     />
@@ -29,7 +29,7 @@
     
     @can('riwayat-list')
     <x-nav-link 
-        text="Riwayat Pengecekan" 
+        text="Riwayat Pemeriksaan" 
         icon="sync" 
         url="{{ route('admin.riwayat.daftar') }}"
         active="{{ request()->routeIs('admin.riwayat.daftar') ? ' active' : '' }}"
@@ -49,8 +49,8 @@
 
     @can('penyakit-list')
     <x-nav-link 
-        text="Daftar Kerusakan" 
-        icon="laptop" 
+        text="Daftar Penyakit" 
+        icon="book-medical" 
         url="{{ route('admin.penyakit') }}"
         active="{{ request()->routeIs('admin.penyakit') ? ' active' : '' }}"
     />
@@ -59,7 +59,7 @@
     @can('gejala-list')
     <x-nav-link 
         text="Daftar Gejala" 
-        icon="microchip" 
+        icon="crutch" 
         url="{{ route('admin.gejala') }}"
         active="{{ request()->routeIs('admin.gejala') ? ' active' : '' }}"
     />

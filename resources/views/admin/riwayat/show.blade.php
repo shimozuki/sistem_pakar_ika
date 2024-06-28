@@ -27,7 +27,7 @@
 				@endforeach
 			</tbody>
 		</table>
-		
+
 		@foreach(unserialize($riwayat->hasil_diagnosa) as $diagnosa)
 		<div class="card card-body p-0 mt-5 border" style="box-shadow: none !important;">
 			<div class="card-header bg-primary text-white p-2">
@@ -57,19 +57,22 @@
 						<td scope="row">Nilai CF</td>
 						<td><span class="text-danger">{{ number_format($diagnosa['hasil_cf'], 3) }}</span></td>
 					</tr>
-				</tfoot>	
+				</tfoot>
 			</table>
 		</div>
 		@endforeach
 		<div class="mt-5">
 			<div class="alert alert-success">
 				<h5 class="font-weight-bold">Kesimpulan</h5>
-				<p>Berdasarkan dari gejala yang kamu pilih atau alami juga berdasarkan Role/Basis aturan yang sudah ditentukan oleh seorang pakar Jaringan maka perhitungan Algoritma Certainty Factor mengambil nilai yang paling pinggi yakni <b>{{ number_format(unserialize($riwayat->cf_max)[0], 3) }} ({{ number_format(unserialize($riwayat->cf_max)[0], 3) * 100 }}%)</b> yaitu <b>{{ unserialize($riwayat->cf_max)[1] }}</b></p>
+				<p>Berdasarkan dari gejala yang kamu pilih atau alami juga berdasarkan Role/Basis aturan yang sudah ditentukan oleh seorang pakar Jaringan maka perhitungan Algoritma Certainty Factor mengambil nilai yang paling tinggi yakni <b>{{ number_format(unserialize($riwayat->cf_max)[0], 3) }} ({{ number_format(unserialize($riwayat->cf_max)[0], 3) * 100 }}%)</b> yaitu <b>{{ unserialize($riwayat->cf_max)[1] }}</b></p>
+				<p><b>Solusi</b><br />{{ unserialize($riwayat->cf_max)[1] }}</p>
 			</div>
 			<div class="mt-3 text-center">
 				<a href="{{ asset("storage/downloads/$riwayat->file_pdf") }}" target="_blank" class="btn btn-primary mr-1"><i class="fas fa-print mr-1"></i> Print</a>
 				<a href="{{ route('admin.diagnosa') }}" class="btn btn-warning mr-1"><i class="fas fa-redo mr-1"></i> Diagnosa ulang</a>
 			</div>
+		</div>
+
 		</div>
 	</x-card>
 </x-app-layout>

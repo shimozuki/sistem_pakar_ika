@@ -11,13 +11,13 @@
             color="success"
         />
         <x-card-sum 
-            text="Total Cek Kerusakan" 
+            text="Total Pemeriksaan" 
             value="{{ App\Models\Riwayat::count() }}" 
-            icon="tools" 
+            icon="hospital" 
             color="primary"
         />
         <x-card-sum 
-            text="Daftar Kerusakan" 
+            text="Daftar Penyakit" 
             value="{{ App\Models\Penyakit::count() }}" 
             icon="th-list" 
             color="warning"
@@ -60,7 +60,7 @@
             <!-- Area Charts -->
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Statistik Kerusakan</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Statistik Gizi</h6>
                 </div>
                 <div class="card-body">
                   <div class="chart-area">
